@@ -2,6 +2,12 @@ import { articles } from '@/app/data/dummyData';
 import SmartLink from '@/app/components/SmartLink';
 import BackButton from '@/app/components/BackButton';
 
+export async function generateStaticParams() {
+  return articles.map((article) => ({
+    id: article.id,
+  }))
+}
+
 type Params = Promise<{ id: string }>;
 
 export default async function ArticlePage({ params }: { params: Params }) {
