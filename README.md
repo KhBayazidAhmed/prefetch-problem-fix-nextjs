@@ -25,7 +25,7 @@ A comprehensive demonstration of intelligent link prefetching strategies in Next
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/smart-link-prefetch-demo.git
+git clone https://github.com/KhBayazidAhmed/smart-link-prefetch-demo.git
 cd smart-link-prefetch-demo
 ```
 
@@ -266,7 +266,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 If you have any questions or need help, please:
 
 1. Check the [documentation](#-api-reference) above
-2. Look through existing [issues](https://github.com/yourusername/smart-link-prefetch-demo/issues)
+2. Look through existing [issues](https://github.com/KhBayazidAhmed/smart-link-prefetch-demo/issues)
 3. Create a new issue if needed
 
 ---
