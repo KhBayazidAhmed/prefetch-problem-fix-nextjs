@@ -1,9 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Smart Link Prefetch Demo
 
-## Getting Started
+A comprehensive demonstration of intelligent link prefetching strategies in Next.js featuring network-aware, priority-based, and highly configurable prefetching capabilities.
 
-First, run the development server:
+## 🌟 Features
 
+- **🌐 Network-Aware Prefetching**: Automatically adjusts prefetching based on connection type and data saver mode
+- **⚡ Priority-Based Prefetching**: High/medium/low priority levels for different types of links
+- **🎯 Intelligent Prefetching**: Combines viewport-based and hover-based prefetching strategies
+- **🔄 Automatic Retry Logic**: Configurable retry attempts with exponential backoff
+- **📊 Visual Status Indicator**: Optional prefetch status indicator with color coding
+- **🛑 AbortController Support**: Properly cancels ongoing prefetch requests
+- **💾 Memory Efficient**: Cleans up resources and timers properly
+- **📝 TypeScript Support**: Fully typed with comprehensive TypeScript definitions
+- **📱 Responsive Design**: Beautiful, modern UI with excellent UX practices
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18.x or later
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/smart-link-prefetch-demo.git
+cd smart-link-prefetch-demo
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
@@ -14,48 +51,26 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the demo.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎮 Demo Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The demo includes several interactive examples:
 
-## Learn More
+- **Immediate Prefetch**: Links that prefetch as soon as they enter the viewport
+- **Delayed Prefetch**: Links with configurable delays before prefetching
+- **Hover-Only Prefetch**: Links that only prefetch on hover/focus
+- **Network-Aware Demo**: Demonstrates how prefetching adapts to network conditions
+- **Retry Logic Demo**: Shows automatic retry behavior with visual feedback
 
-To learn more about Next.js, take a look at the following resources:
+## 🔧 Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-# Smart Prefetching Link Component
-
-A Next.js link component that implements intelligent prefetching strategies with network awareness and priority-based prefetching.
-
-## Features
-
-- **Network-Aware Prefetching**: Automatically adjusts prefetching based on connection type and data saver mode
-- **Priority-Based Prefetching**: High/medium/low priority levels for different types of links
-- **Intelligent Prefetching**: Combines viewport-based and hover-based prefetching
-- **Automatic Retry Logic**: Configurable retry attempts with exponential backoff
-- **Visual Status Indicator**: Optional prefetch status indicator with color coding
-- **AbortController Support**: Properly cancels ongoing prefetch requests
-- **Memory Efficient**: Cleans up resources and timers properly
-- **TypeScript Support**: Fully typed with TypeScript
-
-## Usage
+### Basic Usage
 
 ```tsx
 import SmartLink from './components/SmartLink';
 
-// Basic usage
+// Simple usage
 <SmartLink href="/some-page">Click me</SmartLink>
 
 // High priority link with status indicator
@@ -66,7 +81,11 @@ import SmartLink from './components/SmartLink';
 >
   Critical Page
 </SmartLink>
+```
 
+### Advanced Configuration
+
+```tsx
 // Network-aware link with retry support
 <SmartLink 
   href="/important-page"
@@ -78,7 +97,7 @@ import SmartLink from './components/SmartLink';
   Important Page
 </SmartLink>
 
-// Hover-only prefetching
+// Hover-only prefetching with custom delay
 <SmartLink 
   href="/optional-page"
   enableViewport={false}
@@ -90,7 +109,9 @@ import SmartLink from './components/SmartLink';
 </SmartLink>
 ```
 
-## Props
+## 📚 API Reference
+
+### SmartLink Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -112,140 +133,142 @@ import SmartLink from './components/SmartLink';
 | `className` | `string` | `undefined` | CSS classes to apply to the link |
 | `children` | `ReactNode` | Required | Link content |
 
-## Prefetching Behavior
+## 🧠 Prefetching Strategies
 
-The component implements multiple prefetching strategies:
+### 1. Network-Aware Prefetching
 
-1. **Network-Aware Prefetching**:
-   - Automatically detects connection type (2G, 3G, 4G)
-   - Respects data saver mode
-   - Adjusts prefetching based on priority and network conditions
-   - High priority links prefetch even on slower connections
-   - Low priority links only prefetch on fast connections
+The component automatically detects and adapts to network conditions:
 
-2. **Viewport-based Prefetching**:
-   - Triggers when the link enters the viewport
-   - Respects the `viewportDelay` setting
-   - Uses IntersectionObserver for efficient detection
-   - Configurable viewport margin via `rootMargin`
+- **Fast connections (4G)**: All priority levels prefetch normally
+- **Medium connections (3G)**: High and medium priority links prefetch
+- **Slow connections (2G)**: Only high priority links prefetch  
+- **Data Saver Mode**: All prefetching is disabled
 
-3. **Hover-based Prefetching**:
-   - Triggers on hover or focus
-   - Configurable delay via `hoverDelay`
-   - Works alongside viewport prefetching
+### 2. Viewport-Based Prefetching
 
-4. **Automatic Retry Logic**:
-   - Configurable retry attempts
-   - Exponential backoff between retries
-   - Retry status tracking and callbacks
+- Triggers when links enter the viewport using IntersectionObserver
+- Configurable viewport margin and threshold
+- Optional delay before prefetching begins
+- Automatically cancels if link leaves viewport before delay completes
 
-## Status Indicator
+### 3. Hover-Based Prefetching
 
-The component can show a visual status indicator with the following states:
+- Triggers on hover (mouseenter) or focus events
+- Configurable delay before prefetching starts
+- Automatically cancels if hover ends before delay completes
+- Works alongside viewport prefetching
 
-- Gray: Idle
-- Blue (pulsing): Loading
-- Green: Success
-- Red: Error
-- Yellow (pulsing): Retrying
+### 4. Retry Logic
 
-## Best Practices
+- Configurable maximum retry attempts
+- Exponential backoff between retries
+- Visual feedback during retry attempts
+- Detailed retry callbacks for monitoring
 
-1. **Priority Levels**:
-   - Use `high` for critical navigation and above-the-fold links
-   - Use `medium` for important but not critical links
-   - Use `low` for optional or below-the-fold content
+## 🎨 Status Indicator
 
-2. **Network Conditions**:
-   - High priority links will prefetch even on 2G
-   - Medium priority links prefetch on 3G and better
-   - Low priority links only prefetch on 4G
-   - All prefetching is disabled when data saver is enabled
+The visual status indicator shows prefetch states:
 
-3. **Retry Configuration**:
-   - Use higher `maxRetries` for critical links
-   - Adjust `retryDelay` based on expected network conditions
-   - Monitor retry attempts through `onPrefetchRetry` callback
+- **Gray**: Idle state
+- **Blue (pulsing)**: Loading/prefetching
+- **Green**: Successfully prefetched
+- **Red**: Error occurred
+- **Yellow (pulsing)**: Retrying after error
 
-4. **Viewport Delay**:
-   - Use `0` for critical above-the-fold links
-   - Use higher values for less important links
-   - Consider user's connection speed when setting delays
+## 🏆 Best Practices
 
-5. **Status Indicator**:
-   - Enable for debugging or user feedback
-   - Use tooltips to show detailed status information
-   - Consider hiding for less important links
+### Priority Levels
 
-## Example Implementation
+- **High Priority**: Critical navigation, above-the-fold links
+- **Medium Priority**: Important but not critical links
+- **Low Priority**: Optional or below-the-fold content
 
-```tsx
-// Critical navigation (immediate prefetch, high priority)
-<SmartLink 
-  href="/home"
-  priority="high"
-  viewportDelay={0}
-  rootMargin="100px"
-  showStatus={true}
->
-  Home
-</SmartLink>
+### Network Optimization
 
-// Secondary navigation (delayed prefetch, medium priority)
-<SmartLink 
-  href="/about"
-  priority="medium"
-  viewportDelay={1000}
-  rootMargin="200px"
-  maxRetries={2}
->
-  About
-</SmartLink>
+- Use higher priorities for essential user flows
+- Consider user's connection when setting delays
+- Monitor retry attempts for network issues
+- Respect data saver preferences
 
-// Optional content (hover only, low priority)
-<SmartLink 
-  href="/contact"
-  priority="low"
-  enableViewport={false}
-  enableHover={true}
-  hoverDelay={500}
->
-  Contact
-</SmartLink>
+### Performance Tips
+
+- Set appropriate viewport delays based on content importance
+- Use status indicators for debugging and user feedback
+- Configure retry logic based on expected network conditions
+- Clean up resources properly to prevent memory leaks
+
+## 🛠️ Technical Implementation
+
+### Core Technologies
+
+- **Next.js 15.3.2**: App Router with advanced prefetching
+- **React 19**: Latest React features and hooks
+- **TypeScript**: Full type safety and development experience
+- **Tailwind CSS**: Modern, responsive styling
+- **IntersectionObserver API**: Efficient viewport detection
+- **Network Information API**: Network condition awareness
+
+### Key Features
+
+- Automatic resource cleanup and memory management
+- AbortController for request cancellation
+- Exponential backoff retry strategy
+- Comprehensive error handling
+- Performance monitoring and callbacks
+
+## 🏗️ Project Structure
+
+```
+smart-link-prefetch-demo/
+├── app/
+│   ├── components/          # Reusable components
+│   │   ├── SmartLink.tsx   # Main smart link component
+│   │   ├── NetworkStatus.tsx # Network status display
+│   │   ├── DemoNav.tsx     # Demo navigation
+│   │   └── BackButton.tsx  # Navigation helper
+│   ├── immediate/          # Immediate prefetch demo
+│   ├── delayed/            # Delayed prefetch demo
+│   ├── hover/              # Hover-only prefetch demo
+│   ├── network/            # Network-aware demo
+│   ├── retry/              # Retry logic demo
+│   ├── article/[id]/       # Dynamic article pages
+│   ├── data/               # Demo data
+│   └── globals.css         # Global styles
+├── public/                 # Static assets
+└── README.md              # This file
 ```
 
-## Performance Considerations
+## 🤝 Contributing
 
-- Network-aware prefetching prevents unnecessary requests on slow connections
-- Priority-based prefetching ensures critical content loads first
-- Automatic retry logic handles temporary network issues
-- The component is memoized to prevent unnecessary re-renders
-- Resources are properly cleaned up on unmount
-- AbortController prevents unnecessary network requests
-- Default settings are optimized for most use cases
+We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-## Browser Support
+### Development
 
-- Works in all modern browsers
-- Network Information API support for network-aware prefetching
-- Gracefully degrades in older browsers
-- No polyfills required for core functionality
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## NetworkStatus Component
+## 📄 License
 
-The `NetworkStatus` component displays the current network status based on the Network Information API. It shows the effective connection type and whether the data saver mode is enabled.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### Browser Support
+## 🙏 Acknowledgments
 
-Please note that the Network Information API is not supported in all browsers. Ensure you are using a modern browser that implements this API.
+- Built with [Next.js](https://nextjs.org/) and [React](https://reactjs.org/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
+- Uses modern web APIs for optimal performance
+- Inspired by modern web performance best practices
 
-### Usage
+## 📞 Support
 
-```tsx
-import NetworkStatus from './components/NetworkStatus';
+If you have any questions or need help, please:
 
-// Basic usage
-<NetworkStatus className="custom-class" />
-```
+1. Check the [documentation](#-api-reference) above
+2. Look through existing [issues](https://github.com/yourusername/smart-link-prefetch-demo/issues)
+3. Create a new issue if needed
 
-This component will display the current network type and indicate if the data saver mode is active. It updates automatically when the network status changes.
+---
+
+⭐ If this project helped you, please consider giving it a star on GitHub!

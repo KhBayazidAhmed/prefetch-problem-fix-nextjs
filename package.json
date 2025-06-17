@@ -1,7 +1,16 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "smart-link-prefetch-demo",
+  "version": "1.0.0",
+  "description": "A demonstration of intelligent link prefetching strategies in Next.js with network-aware, priority-based, and configurable prefetching",
+  "private": false,
+  "keywords": ["nextjs", "prefetch", "performance", "react", "optimization", "network-aware", "typescript"],
+  "author": "Kh Bayazid Ahmed",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/smart-link-prefetch-demo.git"
+  },
+  "homepage": "https://github.com/yourusername/smart-link-prefetch-demo#readme",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
